@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1539088028 source:/home/crash/work/Arazi_BPV/main.c
+	"uECC_vli.h"
+	<uECC.h>
+	"BPV.h"
+	"types.h"
+	"stdio.h"
+	"sha256.h"
+	<string.h>
+	<stdlib.h>
+	<time.h>
+
+1538490578 /home/crash/work/Arazi_BPV/uECC_vli.h
+	"uECC.h"
+	"types.h"
+
+1538490578 /home/crash/work/Arazi_BPV/types.h
+
+1430106649 /home/crash/work/Arazi_BPV/sha256.h
+	<stddef.h>
+
+1430106649 source:/home/crash/work/Arazi_BPV/sha256.c
+	<stdlib.h>
+	<memory.h>
+	"sha256.h"
+
+1538655205 source:/home/crash/work/Arazi_BPV/uECC.c
+	"uECC.h"
+	"uECC_vli.h"
+	"platform-specific.inc"
+	"asm_arm.inc"
+	"asm_avr.inc"
+	"curve-specific.inc"
+
+1538490578 /home/crash/work/Arazi_BPV/platform-specific.inc
+	"types.h"
+	<windows.h>
+	<wincrypt.h>
+	<sys/types.h>
+	<fcntl.h>
+	<unistd.h>
+
+1538490578 /home/crash/work/Arazi_BPV/curve-specific.inc
+
+1539086693 source:/home/crash/work/Arazi_BPV/BPV.c
+	"uECC_vli.h"
+	<uECC.h>
+	"types.h"
+	"stdio.h"
+	"sha256.h"
+	<string.h>
+	<stdlib.h>
+	<time.h>
+
+1539084418 /home/crash/work/Arazi_BPV/BPV.h
+
