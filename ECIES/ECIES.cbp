@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="ECHMQV_Arazi_BPV" />
+		<Option title="ECIES" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/ECHMQV_Arazi_BPV" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/ECIES" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/ECHMQV_Arazi_BPV" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/ECIES" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,19 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../Source/curve-specific.inc" />
-		<Unit filename="../Source/keys.h" />
-		<Unit filename="../Source/platform-specific.inc" />
-		<Unit filename="../Source/sha256.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Source/sha256.h" />
-		<Unit filename="../Source/types.h" />
-		<Unit filename="../Source/uECC.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Source/uECC.h" />
-		<Unit filename="../Source/uECC_vli.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

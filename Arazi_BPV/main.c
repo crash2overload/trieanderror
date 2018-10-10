@@ -12,7 +12,7 @@ static int RNG(uint8_t *dest, unsigned size) {
 
   while (size) {
     uint8_t val = 0;
-    val = rand() % 255 + 1;
+    val = rand() % 254;
     *dest = val;
     ++dest;
     --size;
