@@ -31,6 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../Source/aes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Source/aes.h" />
+		<Unit filename="../Source/curve-specific.inc" />
+		<Unit filename="../Source/keys.h" />
+		<Unit filename="../Source/platform-specific.inc" />
+		<Unit filename="../Source/sha256.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Source/sha256.h" />
+		<Unit filename="../Source/types.h" />
+		<Unit filename="../Source/uECC.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Source/uECC.h" />
+		<Unit filename="../Source/uECC_vli.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
