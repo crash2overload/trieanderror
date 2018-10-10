@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
-1539088028 source:/home/crash/work/Arazi_BPV/main.c
+1539162271 source:/home/crash/work/Arazi_BPV/main.c
 	"uECC_vli.h"
-	<uECC.h>
+	"uECC.h"
 	"BPV.h"
 	"types.h"
 	"stdio.h"
@@ -42,7 +42,7 @@
 
 1538490578 /home/crash/work/Arazi_BPV/curve-specific.inc
 
-1539086693 source:/home/crash/work/Arazi_BPV/BPV.c
+1539162232 source:/home/crash/work/Arazi_BPV/BPV.c
 	"uECC_vli.h"
 	<uECC.h>
 	"types.h"
@@ -53,4 +53,7 @@
 	<time.h>
 
 1539084418 /home/crash/work/Arazi_BPV/BPV.h
+
+1539152393 /home/crash/work/Arazi_BPV/uECC.h
+	<stdint.h>
 

@@ -26,22 +26,25 @@ void get_BPV_Table(const uint8_t *privateAlice, const uint8_t *publicBob, const 
 
   time_t t;
   srand((unsigned) time(&t));
-  //uECC_set_rng(&RNG);
+  uECC_set_rng(&RNG);
 
   const struct uECC_Curve_t * curve = uECC_secp192r1();
 
-  uint8_t pointAlice1[48];
+  uint8_t publicAlice1[48];
+  uint8_t privateAlice1[24];
+  uint8_t pointAlice1[48] = {0};
   uint8_t pointBob1[48];
 
-  if (! uECC_shared_secret2(publicBob, IDBob, pointAlice1, curve))
-    printf("fail");
-
+  uECC_shared_secret2(publicBob, IDBob, pointAlice1, curve);
   EllipticAdd(pointAlice1, publicCA, pointAlice1, curve);
-//  for (int j = 0; j < 48; ++j) {
-//    printf("0x"); printf("%x", pointAlice1[j]); printf(", ");
-//    }
-//    printf("\n");
 
-  uECC_shared_secret2(pointAlice1, privateAlice, Table, curve);
-
+  for (int i = 0; i < 160; i++)
+  {
+      uECC_make_key(publicAlice1, privateAlice1, curve);
+      for (unsigned j = 0; j < 24; ++j) {
+      printf("0x%x, ", privateAlice1[j]);}
+      uECC_shared_secret2(pointAlice1, privateAlice1, pointBob1, curve);
+      for (unsigned j = 0; j < 24; ++j) {
+      printf("0x%x, ", pointBob1[j]);}
+  }
 }
