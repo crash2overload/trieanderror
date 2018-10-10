@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1538654406 source:/home/crash/work/Arazi/main.c
+1539069791 source:/home/crash/work/Arazi/main.c
 	"uECC_vli.h"
-	"uECC.h"
+	<uECC.h>
 	"types.h"
 	"stdio.h"
-	<openssl/sha.h>
+	"sha256.h"
 	<string.h>
+	<stdlib.h>
+	<time.h>
 
 1538490578 /home/crash/work/Arazi/uECC_vli.h
 	"uECC.h"
@@ -15,4 +17,43 @@
 	<stdint.h>
 
 1538490578 /home/crash/work/Arazi/types.h
+
+1430106649 /home/crash/work/Arazi/sha256.h
+	<stddef.h>
+
+1430106649 source:/home/crash/work/Arazi/sha256.c
+	<stdlib.h>
+	<memory.h>
+	"sha256.h"
+
+1538655205 source:/home/crash/work/Arazi/uECC.c
+	"uECC.h"
+	"uECC_vli.h"
+	"platform-specific.inc"
+	"asm_arm.inc"
+	"asm_avr.inc"
+	"curve-specific.inc"
+
+1538490578 /home/crash/work/Arazi/platform-specific.inc
+	"types.h"
+	<windows.h>
+	<wincrypt.h>
+	<sys/types.h>
+	<fcntl.h>
+	<unistd.h>
+
+1538490576 /home/crash/work/Arazi/asm_arm.inc
+	"asm_arm_mult_square_umaal.inc"
+	"asm_arm_mult_square.inc"
+
+1538490576 /home/crash/work/Arazi/asm_arm_mult_square_umaal.inc
+
+1538490576 /home/crash/work/Arazi/asm_arm_mult_square.inc
+
+1538490576 /home/crash/work/Arazi/asm_avr.inc
+	"asm_avr_mult_square.inc"
+
+1538490578 /home/crash/work/Arazi/asm_avr_mult_square.inc
+
+1538490578 /home/crash/work/Arazi/curve-specific.inc
 

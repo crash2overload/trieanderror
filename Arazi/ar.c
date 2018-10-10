@@ -4,7 +4,7 @@
 
 #include <SHA256.h>
 #include <string.h>
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h>
 
 extern "C" {
 
@@ -28,16 +28,13 @@ static int RNG(uint8_t *dest, unsigned size) {
 
 
 
+
+
+
+
+int main() {
+uECC_set_rng(&RNG);
 SHA256 sha256;
-
-void setup() {
-  Serial.begin(115200);
-  Serial.print("Testing Arazi\n");
-  uECC_set_rng(&RNG);
-}
-
-
-void loop() {
   const struct uECC_Curve_t * curve = uECC_secp192r1();
   uint8_t privateCA[24];
   uint8_t publicCA[48];
@@ -69,13 +66,13 @@ void loop() {
   uECC_make_key(publicAlice1, privateAlice1, curve);
   uECC_make_key(publicBob1, privateBob1, curve);
 
-  a = micros();
+  //a = micros();
   sha256.reset();
   sha256.update(publicAlice1, sizeof(publicAlice1));
   sha256.finalize(hash, sizeof(hash));
-  b = micros();
-  unsigned long clockcycle;
-  clockcycle = microsecondsToClockCycles(b-a);
+  //b = micros();
+  //unsigned long clockcycle;
+  //clockcycle = microsecondsToClockCycles(b-a);
 
   c = micros();
   sha256.reset();

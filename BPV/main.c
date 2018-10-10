@@ -1,11 +1,12 @@
 #include "uECC_vli.h"
-#include "uECC.h"
+#include <uECC.h>
 #include "types.h"
 #include "stdio.h"
-#include <openssl/sha.h>
+#include "sha256.h"
+//#include <openssl/sha.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <time.h>
 
 
 
@@ -22,19 +23,13 @@ static int RNG(uint8_t *dest, unsigned size) {
   return 1;
 }
 
+void main() {
 
-SHA256 sha256;
-
-void setup() {
-  Serial.begin(115200);
-  Serial.print("Testing Arazi\n");
+  time_t t;
+  srand((unsigned) time(&t));
   uECC_set_rng(&RNG);
 
-  randomSeed(analogRead(0));
-
   const struct uECC_Curve_t * curve = uECC_secp192r1();
- // uint8_t privateCA[24];
-  //uint8_t publicCA[48];
 
   uint8_t privateAlice1[24];
   uint8_t privateAlice2[24];
@@ -66,49 +61,21 @@ void setup() {
   uint8_t privateCA[24] = {0xB6, 0xE, 0x87, 0xB8, 0xDB, 0x7F, 0xB4, 0x3C, 0xBB, 0xDE, 0x1E, 0x1E, 0xCC, 0xFE, 0x44, 0x1, 0x26, 0xD4, 0xBB, 0xEE, 0xE8, 0x70, 0x18, 0x3E};
   uint8_t publicCA[48] = {0x9F, 0xD2, 0x62, 0xED, 0x71, 0x19, 0xEA, 0xF4, 0x64, 0x25, 0xCF, 0x22, 0x34, 0x7C, 0x90, 0xBA, 0xC6, 0x92, 0x24, 0x31, 0xBC, 0x9, 0x1E, 0x56, 0x55, 0x39, 0xC8, 0xAE, 0xBF, 0x7A, 0x79, 0x8B, 0xA3, 0xF2, 0xE5, 0x39, 0x5A, 0x48, 0xC9, 0x27, 0x48, 0x96, 0xEC, 0x4F, 0x68, 0x9C, 0xDB, 0xF9};
 
-
-  unsigned long a,b,c,d;
-
-//  for (unsigned i = 0; i < 24; i++)
-//  {
-//    randNumber = random(160);
-//    Serial.print(randNumber); Serial.print(", ");
-//  }
-//
-//
-//  for (unsigned i = 0; i < 24; i++)
-//  {
-//    privateAlice1[i] = pgm_read_word_near(BPVTable + i);
-//    //Serial.print("0x"); Serial.print(privateAlice1[i], HEX); Serial.print(", ");
-//  }
-//
-//  for (unsigned i = 24; i < 72; i++)
-//  {
-//    publicAlice1[i-24] = pgm_read_word_near(BPVTable + i);
-//    //Serial.print("0x"); Serial.print(publicAlice1[i], HEX); Serial.print(", ");
-//  }
-//
-//  uECC_compute_public_key(privateAlice1, pointAlice1, curve);
-//
-//  if (memcmp(publicAlice1, pointAlice1, 48) != 0) {
-//    Serial.print("Shared secrets are not identical!\n");
-//  } else {
-//    Serial.print("Shared secrets are identical\n");
-//  }
-  sha256.reset();
-  sha256.update(publicBob1, sizeof(publicBob1));
-  sha256.finalize(hash2, sizeof(hash2));
+  SHA256_CTX ctx;
+  sha256_init(&ctx);
+  sha256_update(&ctx, publicBob1, sizeof(publicBob1));
+  sha256_final(&ctx, hash2);
 
   uECC_shared_secret2(publicBob1, hash2, pointAlice1, curve);
   EllipticAdd(pointAlice1, publicCA, pointAlice1, curve);
 
 
-  Serial.print("const PROGMEM  uint8_t BPVTable[] = {");
+  printf("const PROGMEM  uint8_t BPVTable[] = {");
   for (unsigned i = 0; i < 160; ++i) {
 
     uECC_make_key(publicAlice1, privateAlice1, curve);
     for (unsigned j = 0; j < 24; ++j) {
-      Serial.print("0x"); Serial.print(privateAlice1[j], HEX); Serial.print(", ");
+      printf("0x"); printf("%x", privateAlice1[j]); printf(", ");
     }
 //    for (unsigned j = 0; j < 48; ++j) {
 //      Serial.print("0x"); Serial.print(publicAlice1[j], HEX); Serial.print(", ");
@@ -117,30 +84,9 @@ void setup() {
     uECC_shared_secret2(pointAlice1, privateAlice1, pointBob1, curve);
 
     for (unsigned j = 0; j < 48; ++j) {
-      Serial.print("0x"); Serial.print(pointBob1[j], HEX); Serial.print(", ");
+      printf("0x"); printf("%x", pointBob1[j]); printf(", ");
     }
 
   }
-  Serial.print("};");
-
-//  uECC_make_key(publicBob1, privateBob1, curve);
-//  Serial.print("uint8_t privateCA[24] = {");
-//  for (unsigned j = 0; j < 24; ++j) {
-//    Serial.print("0x"); Serial.print(privateBob1[j], HEX); Serial.print(", ");
-//  }
-//  Serial.print("};");
-//
-//  Serial.print("uint8_t publicCA[48] = {");
-//  for (unsigned j = 0; j < 48; ++j) {
-//    Serial.print("0x"); Serial.print(publicBob1[j], HEX); Serial.print(", ");
-//  }
-//  Serial.print("};");
-
-}
-
-void loop() {
-
-
-
-
+  printf("};");
 }

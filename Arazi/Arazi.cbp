@@ -11,9 +11,17 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="/home/crash/work/Arazi/" />
 				</Compiler>
+				<ResourceCompiler>
+					<Add directory="/home/crash/work/Arazi/" />
+				</ResourceCompiler>
+				<Linker>
+					<Add directory="/home/crash/work/Arazi/" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Arazi" prefix_auto="1" extension_auto="1" />
@@ -34,6 +42,15 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="platform-specific.inc" />
+		<Unit filename="sha256.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sha256.h" />
+		<Unit filename="uECC.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="uECC_vli.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1430106649 source:/home/crash/work/BPV/sha256.c
+	<stdlib.h>
+	<memory.h>
+	"sha256.h"
+
+1430106649 /home/crash/work/BPV/sha256.h
+	<stddef.h>
+
+1538655205 source:/home/crash/work/BPV/uECC.c
+	"uECC.h"
+	"uECC_vli.h"
+	"platform-specific.inc"
+	"asm_arm.inc"
+	"asm_avr.inc"
+	"curve-specific.inc"
+
+1538490578 /home/crash/work/BPV/uECC_vli.h
+	"uECC.h"
+	"types.h"
+
+1538490578 /home/crash/work/BPV/types.h
+
+1538490578 /home/crash/work/BPV/platform-specific.inc
+	"types.h"
+	<windows.h>
+	<wincrypt.h>
+	<sys/types.h>
+	<fcntl.h>
+	<unistd.h>
+
+1538490578 /home/crash/work/BPV/curve-specific.inc
+

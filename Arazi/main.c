@@ -2,14 +2,10 @@
 #include <uECC.h>
 #include "types.h"
 #include "stdio.h"
-#include "Crypto/SHA256.h"
-//#include <openssl/sha.h>
+#include "sha256.h"
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-//#include <avr/pgmspace.h>
-
-
 
 static int RNG(uint8_t *dest, unsigned size) {
 
@@ -53,8 +49,6 @@ int main()
 
   uint8_t hash[24] = {0};
   uint8_t hash2[24] = {0};
-  uint8_t hash3[32] = {0};
-  uint8_t hash4[32] = {0};
 
   uint8_t pointAlice1[48];
   uint8_t pointBob1[48];
@@ -62,19 +56,19 @@ int main()
   uint8_t pointAlice2[48];
   uint8_t pointBob2[48];
 
-  unsigned long a,b,c,d;
+ // unsigned long a,b,c,d;
 
 
       uECC_make_key(publicCA, privateCA, curve);
       uECC_make_key(publicAlice1, privateAlice1, curve);
       uECC_make_key(publicBob1, privateBob1, curve);
-    SHA256 sha256;
-    sha256.reset();
-    sha256.update(publicBob1, sizeof(publicBob1));
-    sha256.finalize(hash2, sizeof(hash2));
-    sha256.reset();
-    sha256.update(publicAlice1, sizeof(publicAlice1));
-    sha256.finalize(hash, sizeof(hash));
+    SHA256_CTX ctx;
+    sha256_init(&ctx);
+    sha256_update(&ctx, publicBob1, sizeof(publicBob1));
+    sha256_final(&ctx, hash2);
+    sha256_init(&ctx);
+    sha256_update(&ctx, publicAlice1, sizeof(publicAlice1));
+    sha256_final(&ctx, hash);
 
 //    SHA256_CTX ctx, ctx2;
 //    SHA256_Init(&ctx);
@@ -89,12 +83,6 @@ int main()
 
     modularMultAdd(hash, privateAlice1, privateCA, privateAlice1, curve);
     modularMultAdd(hash2, privateBob1, privateCA, privateBob1, curve);
-
-    //modularAdd2(privateAlice1, privateCA, privateAlice1, curve);
-    //modularAdd2(privateBob1, privateCA, privateBob1, curve);
-
-    //modularMult2(privateAlice1, hash, privateAlice1, curve);
-    //modularMult2(privateBob1, hash2, privateBob1, curve);
 
     int r = uECC_shared_secret2(publicBob1, privateAlice1, pointAlice2, curve);
     r = uECC_shared_secret2(publicAlice1, privateBob1, pointBob2, curve);
@@ -115,12 +103,12 @@ int main()
     EllipticAdd(pointBob1, pointBob2, pointBob1, curve);
 
   printf("Arazi in: ");
-  for (int j = 0; j < 52; ++j) {
+  for (int j = 0; j < 48; ++j) {
     printf("0x"); printf("%x", pointAlice1[j]); printf(", ");
     printf("0x"); printf("%x", pointBob1[j]); printf("\n ");
   }
 
-  if (memcmp(pointAlice1, pointBob1, 24) != 0) {
+  if (memcmp(&pointAlice1[24], &pointBob1[24], 24) != 0) {
     printf("Shared secrets are not identical!\n");
   } else {
     printf("Shared secrets are identical\n");
